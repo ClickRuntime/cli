@@ -10,6 +10,7 @@
   "keywords": ["clickruntime", "automation", "cron", "webhook", "python", "agent", "cli", "mcp"],
   "repository": { "type": "git", "url": "git+https://github.com/ClickRuntime/cli.git", "directory": "node" },
   "homepage": "https://clickruntime.com/cli",
+  "bugs": { "url": "https://github.com/ClickRuntime/cli/issues" },
   "scripts": {
     "build": "tsc -p .",
     "test": "npm run build && node --test test/*.test.mjs",

@@ -21,6 +21,8 @@ classifiers = [
 Homepage = "https://clickruntime.com/cli"
 Documentation = "https://clickruntime.com/docs/cli"
 Source = "https://github.com/ClickRuntime/cli"
+Issues = "https://github.com/ClickRuntime/cli/issues"
+API = "https://clickruntime.com/docs/api"
 
 [project.scripts]
 clickruntime = "clickruntime_cli.cli:run"

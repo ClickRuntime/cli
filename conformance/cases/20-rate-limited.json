@@ -1,0 +1,37 @@
+{
+  "name": "429 is exit 5 with retry_after_seconds",
+  "args": [
+    "list",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations",
+      "status": 429,
+      "headers": {
+        "Retry-After": "12"
+      },
+      "body": {
+        "error": "rate_limited",
+        "message": "Too many API requests."
+      }
+    }
+  ],
+  "expect": {
+    "exit": 5,
+    "json": {
+      "error": "rate_limited",
+      "details": {
+        "retry_after_seconds": 12
+      }
+    }
+  }
+}

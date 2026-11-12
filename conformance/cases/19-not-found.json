@@ -1,0 +1,33 @@
+{
+  "name": "an API error keeps its code, exit 1",
+  "args": [
+    "show",
+    "aut_x",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations/aut_x",
+      "status": 404,
+      "body": {
+        "error": "not_found",
+        "message": "That automation was not found in this workspace."
+      }
+    }
+  ],
+  "expect": {
+    "exit": 1,
+    "json": {
+      "error": "not_found",
+      "message": "That automation was not found in this workspace."
+    }
+  }
+}

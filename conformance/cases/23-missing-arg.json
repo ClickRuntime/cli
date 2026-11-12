@@ -1,0 +1,21 @@
+{
+  "name": "a missing argument is exit 2",
+  "args": [
+    "show",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [],
+  "expect": {
+    "exit": 2,
+    "json": {
+      "error": "usage"
+    }
+  }
+}

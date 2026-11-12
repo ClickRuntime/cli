@@ -1,0 +1,35 @@
+{
+  "name": "logout ends the sign-in on the server and deletes the profile",
+  "args": [
+    "logout",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "DELETE",
+      "path": "/api/v1/session",
+      "body": {
+        "signed_out": true
+      },
+      "expect_headers": {
+        "authorization": "Bearer tok-file"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "signed_out": true
+    },
+    "files": {
+      "config:credentials.json": null
+    }
+  }
+}

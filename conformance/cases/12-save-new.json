@@ -1,0 +1,81 @@
+{
+  "name": "save creates a draft with an Idempotency-Key and records its id",
+  "args": [
+    "save",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "files": {
+    "clickruntime.json": {
+      "name": "Morning summary",
+      "summary": "Email me the status.",
+      "pattern": "schedule",
+      "schedule": {
+        "kind": "hourly"
+      },
+      "how_it_works": {
+        "steps": [
+          "Reads.",
+          "Emails."
+        ]
+      },
+      "setup_needs": [],
+      "dependencies": []
+    },
+    "automation.py": "from clickruntime import on_trigger\n"
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/automations",
+      "status": 201,
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "summary": "Email me the status.",
+        "status": "draft",
+        "pattern": "schedule",
+        "state": "s1",
+        "dependencies": [],
+        "connections_used": [],
+        "outbound_hosts": [],
+        "how_it_works": {
+          "steps": []
+        },
+        "how_it_works_gaps": [],
+        "notes": [],
+        "layer": null
+      },
+      "expect_headers": {
+        "idempotency-key": "<any>"
+      },
+      "expect_body": {
+        "name": "Morning summary",
+        "pattern": "schedule",
+        "script": "from clickruntime import on_trigger\n",
+        "schedule": {
+          "kind": "hourly"
+        }
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "automation_id": "aut_1",
+      "status": "draft"
+    },
+    "files": {
+      "clickruntime.json": {
+        "automation_id": "aut_1",
+        "name": "Morning summary"
+      }
+    }
+  }
+}

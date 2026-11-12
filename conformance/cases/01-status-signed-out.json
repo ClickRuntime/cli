@@ -1,0 +1,17 @@
+{
+  "name": "status without a sign-in is exit 3 with next.login",
+  "args": [
+    "status",
+    "--json"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 3,
+    "json": {
+      "signed_in": false,
+      "next": {
+        "action": "login"
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "<command> --help prints that command's help without a sign-in",
+  "args": [
+    "deploy",
+    "--help"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 0,
+    "stdout_contains": [
+      "clickruntime deploy <automation_id>",
+      "Exit codes:",
+      "Next:"
+    ]
+  }
+}

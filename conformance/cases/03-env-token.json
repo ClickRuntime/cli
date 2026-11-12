@@ -1,0 +1,35 @@
+{
+  "name": "CLICKRUNTIME_TOKEN overrides the file",
+  "args": [
+    "status",
+    "--json"
+  ],
+  "env": {
+    "CLICKRUNTIME_TOKEN": "tok-env"
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "body": {
+        "id": "prf_1",
+        "email": "ada@example.com",
+        "name": "Ada",
+        "nickname": "Ada"
+      },
+      "expect_headers": {
+        "authorization": "Bearer tok-env"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "signed_in": true,
+      "token_source": "env"
+    },
+    "never_contains": [
+      "tok-env"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "clickruntime",
+  "version": "0.1.0",
+  "description": "ClickRuntime CLI: run Python automations on a schedule or when an event arrives, from a coding agent.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "clickruntime": "dist/cli.js" },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "keywords": ["clickruntime", "automation", "cron", "webhook", "python", "agent", "cli", "mcp"],
+  "repository": { "type": "git", "url": "git+https://github.com/ClickRuntime/cli.git", "directory": "node" },
+  "homepage": "https://clickruntime.com/cli",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  }
+}

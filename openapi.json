@@ -1,0 +1,5395 @@
+{
+  "components": {
+    "schemas": {
+      "AppCatalog": {
+        "properties": {
+          "apps": {
+            "items": {
+              "additionalProperties": true,
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "apps"
+        ],
+        "type": "object"
+      },
+      "Automation": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "changes": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "connections_used": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "dependencies": {
+            "items": {},
+            "type": "array"
+          },
+          "deploy": {
+            "additionalProperties": true,
+            "description": "Deploy state once it has been turned on.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "effect": {
+            "description": "What turning it on does, in one sentence.",
+            "type": "string"
+          },
+          "how_it_works": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "how_it_works_gaps": {
+            "items": {},
+            "type": "array"
+          },
+          "last_run": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Run"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "layer": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "outbound_hosts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "pattern": {
+            "enum": [
+              "schedule",
+              "incoming",
+              "remember_then_schedule"
+            ],
+            "type": "string"
+          },
+          "pending_change": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "retry": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "schedule": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schedule"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "script": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ScriptInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "setup": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Setup"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "state": {
+            "description": "Opaque version of the automation; pass as expected_state to POST /confirmations.",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "live",
+              "paused"
+            ],
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "trigger": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Trigger"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "automation_id",
+          "connections_used",
+          "dependencies",
+          "how_it_works",
+          "how_it_works_gaps",
+          "layer",
+          "name",
+          "notes",
+          "outbound_hosts",
+          "pattern",
+          "state",
+          "status",
+          "summary"
+        ],
+        "type": "object"
+      },
+      "AutomationList": {
+        "properties": {
+          "automations": {
+            "items": {
+              "$ref": "#/components/schemas/AutomationListItem"
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_cursor": {
+            "description": "Pass as ?cursor= for the next page; null on the last page.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "automations",
+          "next_cursor",
+          "total"
+        ],
+        "type": "object"
+      },
+      "AutomationListItem": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "dependency_count": {
+            "type": "integer"
+          },
+          "last_run": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Run"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "pattern": {
+            "enum": [
+              "schedule",
+              "incoming",
+              "remember_then_schedule"
+            ],
+            "type": "string"
+          },
+          "schedule": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schedule"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "live",
+              "paused"
+            ],
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "trigger": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Trigger"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "automation_id",
+          "dependency_count",
+          "last_run",
+          "name",
+          "pattern",
+          "status",
+          "summary"
+        ],
+        "type": "object"
+      },
+      "Confirmation": {
+        "properties": {
+          "action": {
+            "enum": [
+              "enable",
+              "resume",
+              "run_now",
+              "apply_change",
+              "delete",
+              "send_test_event_live"
+            ],
+            "type": "string"
+          },
+          "automation_id": {
+            "type": "string"
+          },
+          "confirmation_ref": {
+            "description": "Poll GET /confirmations/{ref} with it.",
+            "type": "string"
+          },
+          "effect": {
+            "type": "string"
+          },
+          "expires_at": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "outbound_hosts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "schedule": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Schedule"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "action",
+          "automation_id",
+          "confirmation_ref",
+          "expires_at",
+          "name"
+        ],
+        "type": "object"
+      },
+      "ConfirmationStatus": {
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "automation": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "automation_id": {
+            "type": "string"
+          },
+          "confirmation_ref": {
+            "type": "string"
+          },
+          "decided_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "decided_via": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "deploy": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "expires_at": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "state": {
+            "description": "pending until the person decides.",
+            "enum": [
+              "pending",
+              "confirmed",
+              "cancelled",
+              "expired",
+              "used"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "action",
+          "automation",
+          "automation_id",
+          "confirmation_ref",
+          "decided_at",
+          "decided_via",
+          "deploy",
+          "expires_at",
+          "name",
+          "run",
+          "state"
+        ],
+        "type": "object"
+      },
+      "Connect": {
+        "properties": {
+          "account_label": {
+            "type": "string"
+          },
+          "already_connected": {
+            "type": "boolean"
+          },
+          "display_name": {
+            "type": "string"
+          },
+          "granted_scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "new_scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider": {
+            "type": "string"
+          },
+          "purpose": {
+            "enum": [
+              "automation",
+              "notifications"
+            ],
+            "type": "string"
+          },
+          "scopes_plain": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "used_by": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "why_needed": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "already_connected",
+          "display_name",
+          "granted_scopes",
+          "name",
+          "new_scopes",
+          "provider",
+          "purpose",
+          "scopes_plain",
+          "used_by"
+        ],
+        "type": "object"
+      },
+      "Connections": {
+        "properties": {
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notifications": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "providers": {
+            "items": {
+              "additionalProperties": true,
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "type": "array"
+          },
+          "secret_names": {
+            "description": "Names of saved keys. Values are never returned.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "notifications",
+          "providers",
+          "secret_names"
+        ],
+        "type": "object"
+      },
+      "Error": {
+        "properties": {
+          "details": {
+            "additionalProperties": true,
+            "description": "Extra fields for the error code, for example missing or retry_after_seconds.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "error": {
+            "description": "Stable error code.",
+            "type": "string"
+          },
+          "message": {
+            "description": "What went wrong, in plain words.",
+            "type": "string"
+          },
+          "next": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "error",
+          "message"
+        ],
+        "type": "object"
+      },
+      "EventList": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "events": {
+            "items": {
+              "additionalProperties": true,
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "automation_id",
+          "events",
+          "name",
+          "next_cursor"
+        ],
+        "type": "object"
+      },
+      "Issue": {
+        "properties": {
+          "category": {
+            "enum": [
+              "bug",
+              "connection",
+              "billing",
+              "other"
+            ],
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "has_support_reply": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "messages": {
+            "items": {
+              "additionalProperties": true,
+              "type": [
+                "object",
+                "null"
+              ]
+            },
+            "type": "array"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "run_id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "waiting_on_user",
+              "resolved",
+              "closed"
+            ],
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "created_at",
+          "has_support_reply",
+          "id",
+          "source",
+          "status",
+          "title",
+          "updated_at"
+        ],
+        "type": "object"
+      },
+      "IssueList": {
+        "properties": {
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "issues"
+        ],
+        "type": "object"
+      },
+      "LatestEvent": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "event": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "trigger": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Trigger"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "automation_id",
+          "event",
+          "name",
+          "status"
+        ],
+        "type": "object"
+      },
+      "Next": {
+        "properties": {
+          "action": {
+            "description": "Machine-readable step.",
+            "enum": [
+              "open_link",
+              "login",
+              "wait",
+              "retry",
+              "fix_request"
+            ],
+            "type": "string"
+          },
+          "say": {
+            "description": "One sentence to tell the person.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link for the person. Give it exactly as returned; never build or change it.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "say"
+        ],
+        "type": "object"
+      },
+      "OAuthProvider": {
+        "properties": {
+          "auth_params": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "authorize_url": {
+            "type": "string"
+          },
+          "callback_url": {
+            "type": "string"
+          },
+          "client_id_last4": {
+            "type": "string"
+          },
+          "has_secret": {
+            "description": "True once the person saved the app's secret in the ClickRuntime dashboard.",
+            "type": "boolean"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "missing": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "provider_id": {
+            "type": "string"
+          },
+          "scope_separator": {
+            "type": "string"
+          },
+          "scopes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "supports_refresh": {
+            "type": "boolean"
+          },
+          "token_auth": {
+            "type": "string"
+          },
+          "token_url": {
+            "type": "string"
+          },
+          "use_pkce": {
+            "type": "boolean"
+          },
+          "warning": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "auth_params",
+          "authorize_url",
+          "callback_url",
+          "has_secret",
+          "name",
+          "provider_id",
+          "scope_separator",
+          "scopes",
+          "slug",
+          "status",
+          "supports_refresh",
+          "token_auth",
+          "token_url",
+          "use_pkce"
+        ],
+        "type": "object"
+      },
+      "Profile": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "id": {
+            "description": "Stable id for this person in this workspace.",
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nickname": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "id",
+          "name",
+          "nickname"
+        ],
+        "type": "object"
+      },
+      "Run": {
+        "properties": {
+          "attempt": {
+            "type": "integer"
+          },
+          "automation_id": {
+            "type": "string"
+          },
+          "automation_name": {
+            "type": "string"
+          },
+          "connection": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "counted": {
+            "description": "True when the run counts toward the plan's runs.",
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "duration_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error_kind": {
+            "type": "string"
+          },
+          "event": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "fetched": {},
+          "finished_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "logs": {
+            "items": {},
+            "type": "array"
+          },
+          "logs_truncated": {
+            "type": "boolean"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "scheduled_time": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "started_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed",
+              "timed_out",
+              "skipped"
+            ],
+            "type": "string"
+          },
+          "summary": {},
+          "trigger": {
+            "description": "What started the run, for example schedule, incoming or manual.",
+            "type": "string"
+          },
+          "unbilled_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "attempt",
+          "automation_id",
+          "counted",
+          "created_at",
+          "duration_ms",
+          "error",
+          "fetched",
+          "finished_at",
+          "id",
+          "scheduled_time",
+          "started_at",
+          "status",
+          "summary",
+          "trigger",
+          "unbilled_reason"
+        ],
+        "type": "object"
+      },
+      "RunList": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/Run"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "automation_id",
+          "name",
+          "next_cursor",
+          "runs"
+        ],
+        "type": "object"
+      },
+      "RuntimeDoc": {
+        "properties": {
+          "content": {
+            "description": "The script reference: handlers, the event object, state, notify, http, and allowed packages.",
+            "type": "string"
+          },
+          "format": {
+            "enum": [
+              "markdown"
+            ],
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "content",
+          "format"
+        ],
+        "type": "object"
+      },
+      "Schedule": {
+        "properties": {
+          "armed": {
+            "description": "True when the schedule is active.",
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "next_runs": {
+            "description": "Next run times, ISO 8601.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "spec": {
+            "additionalProperties": true,
+            "description": "The schedule as saved: kind, time, timezone.",
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "armed",
+          "description",
+          "next_runs",
+          "spec"
+        ],
+        "type": "object"
+      },
+      "Script": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "lines": {
+            "type": "integer"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "redacted": {
+            "type": "boolean"
+          },
+          "sha256": {
+            "type": "string"
+          },
+          "version": {}
+        },
+        "required": [
+          "automation_id",
+          "code",
+          "lines",
+          "redacted",
+          "sha256",
+          "version"
+        ],
+        "type": "object"
+      },
+      "ScriptInfo": {
+        "properties": {
+          "lines": {
+            "type": "integer"
+          },
+          "sha256": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "lines",
+          "sha256"
+        ],
+        "type": "object"
+      },
+      "Setup": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SetupItem"
+            },
+            "type": "array"
+          },
+          "ready": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items",
+          "ready"
+        ],
+        "type": "object"
+      },
+      "SetupItem": {
+        "properties": {
+          "account": {
+            "type": "string"
+          },
+          "builtin": {
+            "type": "boolean"
+          },
+          "hint": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "connection",
+              "secret"
+            ],
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "ready": {
+            "type": "boolean"
+          },
+          "scopes_plain": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "url": {
+            "description": "Where the person does this step in the ClickRuntime dashboard. Keys are only ever entered there.",
+            "type": "string"
+          },
+          "why_needed": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "ready"
+        ],
+        "type": "object"
+      },
+      "SetupRun": {
+        "properties": {
+          "attempt": {
+            "type": "integer"
+          },
+          "automation_id": {
+            "type": "string"
+          },
+          "automation_name": {
+            "type": "string"
+          },
+          "connection": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "counted": {
+            "description": "True when the run counts toward the plan's runs.",
+            "type": "boolean"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "duration_ms": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "error_kind": {
+            "type": "string"
+          },
+          "event": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "fetched": {},
+          "finished_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "logs": {
+            "items": {},
+            "type": "array"
+          },
+          "logs_truncated": {
+            "type": "boolean"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "purpose": {
+            "enum": [
+              "discover",
+              "setup"
+            ],
+            "type": "string"
+          },
+          "scheduled_time": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "setup_run_id": {
+            "type": "string"
+          },
+          "started_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed",
+              "timed_out",
+              "skipped"
+            ],
+            "type": "string"
+          },
+          "summary": {},
+          "trigger": {
+            "description": "What started the run, for example schedule, incoming or manual.",
+            "type": "string"
+          },
+          "unbilled_reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "attempt",
+          "automation_id",
+          "counted",
+          "created_at",
+          "duration_ms",
+          "error",
+          "fetched",
+          "finished_at",
+          "id",
+          "purpose",
+          "scheduled_time",
+          "setup_run_id",
+          "started_at",
+          "status",
+          "summary",
+          "trigger",
+          "unbilled_reason"
+        ],
+        "type": "object"
+      },
+      "SetupStatus": {
+        "properties": {
+          "automation_id": {
+            "type": "string"
+          },
+          "current_step": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SetupItem"
+            },
+            "type": "array"
+          },
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ready": {
+            "description": "True when every setup step is done.",
+            "type": "boolean"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "live",
+              "paused"
+            ],
+            "type": "string"
+          },
+          "steps": {
+            "description": "Steps left for the person, in order.",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "automation_id",
+          "items",
+          "name",
+          "ready",
+          "status",
+          "steps"
+        ],
+        "type": "object"
+      },
+      "SignedOut": {
+        "properties": {
+          "links": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Links for the person (ClickRuntime dashboard pages, confirm pages, consent pages). Give them exactly as returned.",
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "next": {
+            "description": "Present when the person must act before the agent continues.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Next"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "signed_out": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "signed_out"
+        ],
+        "type": "object"
+      },
+      "Trigger": {
+        "properties": {
+          "armed": {
+            "type": "boolean"
+          },
+          "last_event_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "require_signature": {
+            "type": "boolean"
+          },
+          "signature": {
+            "additionalProperties": true,
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "url": {
+            "description": "Trigger link. An event POSTed to it starts a run.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "armed",
+          "require_signature",
+          "url"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "oauth": {
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://clickruntime.com/oauth/authorize",
+            "refreshUrl": "https://clickruntime.com/oauth/token",
+            "scopes": {
+              "automations:control": "Pause, replay and run setup scripts (going live still needs the person).",
+              "automations:draft": "Save and update drafts, ask for confirmations.",
+              "workspace:read": "See the workspace, automations and runs."
+            },
+            "tokenUrl": "https://clickruntime.com/oauth/token"
+          },
+          "deviceAuthorization": {
+            "deviceAuthorizationUrl": "https://clickruntime.com/oauth/device_authorization",
+            "scopes": {
+              "automations:control": "Pause, replay and run setup scripts (going live still needs the person).",
+              "automations:draft": "Save and update drafts, ask for confirmations.",
+              "workspace:read": "See the workspace, automations and runs."
+            },
+            "tokenUrl": "https://clickruntime.com/oauth/token"
+          }
+        },
+        "type": "oauth2"
+      }
+    }
+  },
+  "info": {
+    "description": "Run Python automations on a schedule or when an event arrives. The same operations and rules as the ClickRuntime MCP server. The person signs in, adds keys and connections, and confirms going live; the agent never does.",
+    "title": "ClickRuntime API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/apps": {
+      "get": {
+        "operationId": "listAppCatalog",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppCatalog"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Apps with ready-made connections.",
+        "tags": [
+          "apps"
+        ],
+        "x-mcp-tool": "list_app_catalog"
+      }
+    },
+    "/automations": {
+      "get": {
+        "operationId": "listAutomations",
+        "parameters": [
+          {
+            "description": "draft, live or paused.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "next_cursor from the previous page.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page size.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "List automations.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "list_automations"
+      },
+      "post": {
+        "operationId": "saveDraft",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "dependencies": {
+                    "description": "Extra PyPI packages the script imports that are not built in, such as [{\"name\": \"tenacity\", \"version\": \"==9.0.0\"}]. Pin an exact version. At most 15. Leave it out to keep the current list; [] removes them all. They install when the script deploys.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "description": "The PyPI package name, such as tenacity.",
+                          "type": "string"
+                        },
+                        "version": {
+                          "description": "A version specifier, such as ==9.0.0.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "deploy": {
+                    "description": "true deploys the change in the same call and waits for the deploy result. Setup must be complete. Leave out to only save.",
+                    "type": "boolean"
+                  },
+                  "how_it_works": {
+                    "additionalProperties": false,
+                    "description": "How the script works, for someone who cannot read code. Required whenever you send a script. steps: 2 to 8 short plain sentences in run order, covering what it reads, what it decides, and what it changes or sends, naming each service it uses. notes: up to 4 sentences for branches that matter, such as what happens when there is nothing to do or a service fails. No code, variable names, or jargon. It must match the script exactly; the card shows it next to the services the server detects in the script.",
+                    "properties": {
+                      "notes": {
+                        "items": {
+                          "maxLength": 240,
+                          "type": "string"
+                        },
+                        "maxItems": 4,
+                        "type": "array"
+                      },
+                      "steps": {
+                        "items": {
+                          "maxLength": 240,
+                          "type": "string"
+                        },
+                        "maxItems": 8,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "steps"
+                    ],
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "A short name the person will recognise, such as \"Morning summary\".",
+                    "maxLength": 120,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "description": "schedule: runs on the schedule. incoming: runs when an event arrives at the trigger link. remember_then_schedule: events are stored in state and a scheduled run acts on them.",
+                    "enum": [
+                      "schedule",
+                      "incoming",
+                      "remember_then_schedule"
+                    ],
+                    "type": "string"
+                  },
+                  "retry": {
+                    "additionalProperties": false,
+                    "description": "incoming only: how a failed run on an event is retried. Platform errors and timeouts are retried up to max_attempts attempts in total; script errors only when retry_script_errors is true. The default is 3 attempts without script errors. It replaces the whole policy.",
+                    "properties": {
+                      "max_attempts": {
+                        "description": "Attempts in total, including the first. 1 turns retries off.",
+                        "maximum": 3,
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "retry_script_errors": {
+                        "description": "Also retry when the script itself raised an error. Only for scripts that are safe to run twice on the same event.",
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "max_attempts"
+                    ],
+                    "type": "object"
+                  },
+                  "schedule": {
+                    "additionalProperties": false,
+                    "description": "When the automation runs. Prefer every_minutes, hourly, daily, weekdays, weekly, or monthly; use cron only when none of them fits, such as the second Tuesday of the month or every 15 minutes during business hours. timezone is an IANA name, required for daily, weekdays, weekly, monthly, and cron; it defaults to UTC for every_minutes and hourly.",
+                    "properties": {
+                      "day_of_month": {
+                        "description": "monthly only: the day of the month, 1 to 28, or \"last\" for the last day. Days 29 to 31 are not offered because some months lack them; use \"last\" for month end.",
+                        "oneOf": [
+                          {
+                            "maximum": 28,
+                            "minimum": 1,
+                            "type": "integer"
+                          },
+                          {
+                            "enum": [
+                              "last"
+                            ],
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "every_minutes": {
+                        "description": "every_minutes only: minutes between runs; must divide 60 and be at least 5.",
+                        "enum": [
+                          5,
+                          6,
+                          10,
+                          12,
+                          15,
+                          20,
+                          30
+                        ],
+                        "type": "integer"
+                      },
+                      "expression": {
+                        "description": "cron only: a 5-field cron (minute hour day-of-month month day-of-week) or a 6-field AWS cron with year, in the schedule's timezone. AWS extras work: L (last day), 15W (weekday nearest the 15th), 6L (last Friday), 3#2 (second Tuesday). Runs at least 5 minutes apart. Set day-of-month or day-of-week, not both.",
+                        "maxLength": 120,
+                        "minLength": 9,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "Cadence. The shortest is every 5 minutes.",
+                        "enum": [
+                          "every_minutes",
+                          "hourly",
+                          "daily",
+                          "weekdays",
+                          "weekly",
+                          "monthly",
+                          "cron"
+                        ],
+                        "type": "string"
+                      },
+                      "minute": {
+                        "description": "hourly only: minute past the hour.",
+                        "maximum": 59,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "time": {
+                        "description": "daily, weekdays, weekly, monthly: 24-hour local time HH:MM.",
+                        "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "description": "IANA timezone such as Europe/London.",
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "weekday": {
+                        "description": "weekly only.",
+                        "enum": [
+                          "monday",
+                          "tuesday",
+                          "wednesday",
+                          "thursday",
+                          "friday",
+                          "saturday",
+                          "sunday"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ],
+                    "type": "object"
+                  },
+                  "script": {
+                    "description": "The complete Python script. Before writing it, you must read the script reference, the MCP resource clickruntime://docs/runtime (read it with resources/read; it is not a tool), or, if you cannot read MCP resources, the same text at https://clickruntime.com/docs/runtime.md; the script must follow them. It needs a @on_trigger (schedule) or @on_event (incoming) handler decorated from clickruntime. Read secrets and connections with clickruntime.credentials; credentials.connection and credentials.secret each return a plain str (the token or value itself, with no .access_token), and the script never gets a refresh token; never write a key's value into the script. Outbound calls are HTTPS only; no subprocess, os.system, multiprocessing or ctypes.",
+                    "maxLength": 100000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "setup_needs": {
+                    "description": "Every connection account and saved key the script reads through clickruntime.credentials. Before writing the script, call list_connections and ask the person which existing account to use for each service (or confirm the one there is); set up a new account only if they ask or none fits. For a service with no account yet, call list_app_catalog and use a ready-made app whose scopes and limits fit, without asking; draft an app of their own only when none fits. Never pick or invent an account name yourself. A script can read only what is declared here. An empty list means nothing to set up. Never put a key's value here.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "hint": {
+                          "description": "secret only: one sentence on where to create the key. Never the value.",
+                          "maxLength": 300,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "kind": {
+                          "description": "connection: a named account of an OAuth service (built in, a ready-made app from list_app_catalog, or an app from draft_oauth_provider). secret: a key the person adds in the ClickRuntime dashboard. notifications: the notifications Slack connection, needed when the script calls notify.slack.",
+                          "enum": [
+                            "connection",
+                            "secret",
+                            "notifications"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "connection: the account name, lowercase, such as work or personal; the script reads it with credentials.connection(provider, name), and several accounts of one provider are separate needs. secret: the secret name, UPPER_SNAKE_CASE, read with credentials.secret(name).",
+                          "pattern": "^([a-z][a-z0-9_]{0,31}|[A-Z][A-Z0-9_]{2,60})$",
+                          "type": "string"
+                        },
+                        "provider": {
+                          "description": "connection: email (built in, always ready, no name), the id of a ready-made app from list_app_catalog (starts with cr_), or the slug of an app from draft_oauth_provider, such as slack or google. secret: optional descriptive label.",
+                          "maxLength": 40,
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "description": "connection with a ready-made app or an app from draft_oauth_provider: the OAuth scopes this script needs from the account, one per item, exactly as the app lists them. Setup stays incomplete until the app requests them and the account has granted them.",
+                          "items": {
+                            "maxLength": 200,
+                            "type": "string"
+                          },
+                          "maxItems": 30,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "kind"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 20,
+                    "type": "array"
+                  },
+                  "signature": {
+                    "additionalProperties": false,
+                    "description": "incoming and remember_then_schedule only: how the platform checks the sender's signature before a run. It replaces all signature settings at once. Use a named provider when the sender is one of them; use hmac_sha256 for any other sender that signs the raw body with HMAC-SHA256, and set header, encoding, and prefix from the sender's docs. The secret's value is never sent here: name it in secret_name and list the same name in setup_needs so the person saves the value in the application. provider none turns the check off.",
+                    "properties": {
+                      "encoding": {
+                        "description": "hmac_sha256 only: how the signature is encoded. Leave out to accept either.",
+                        "enum": [
+                          "hex",
+                          "base64"
+                        ],
+                        "type": "string"
+                      },
+                      "header": {
+                        "description": "hmac_sha256 only: the header that carries the signature, such as x-acme-signature. Leave out to try x-signature, x-signature-256, x-webhook-signature, x-hub-signature-256, and tally-signature.",
+                        "pattern": "^[A-Za-z0-9_-]{1,100}$",
+                        "type": "string"
+                      },
+                      "prefix": {
+                        "description": "hmac_sha256 only: text that must start the header value and is removed before comparing, such as sha256= or v1=. Leave out to accept an optional sha256=.",
+                        "maxLength": 32,
+                        "type": "string"
+                      },
+                      "provider": {
+                        "description": "The sender's signing scheme. none turns the check off.",
+                        "enum": [
+                          "stripe",
+                          "github",
+                          "shopify",
+                          "typeform",
+                          "standard_webhooks",
+                          "hmac_sha256",
+                          "none"
+                        ],
+                        "type": "string"
+                      },
+                      "require": {
+                        "description": "true: a delivery whose signature does not verify is stored as rejected, gets 401, and never runs. false (default): it runs with event.verified.ok false so the script decides.",
+                        "type": "boolean"
+                      },
+                      "secret_name": {
+                        "description": "Required unless provider is none: the saved secret that holds the signing secret, such as STRIPE_WEBHOOK_SECRET. Name only, never the value.",
+                        "pattern": "^[A-Z][A-Z0-9_]{2,60}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "provider"
+                    ],
+                    "type": "object"
+                  },
+                  "summary": {
+                    "description": "One or two plain sentences saying what happens and when. It appears on the cards.",
+                    "maxLength": 1000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "template_id": {
+                    "description": "The starter id when the draft follows a starter from the get-started skill (for example page-summary-email). Leave out otherwise.",
+                    "pattern": "^[a-z0-9-]{1,64}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "summary",
+                  "pattern",
+                  "script",
+                  "how_it_works",
+                  "setup_needs"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Automation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Save a new draft automation.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "save_draft"
+      }
+    },
+    "/automations/{automation_id}": {
+      "get": {
+        "operationId": "getAutomation",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Automation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Get an automation.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "get_automation"
+      },
+      "patch": {
+        "operationId": "updateAutomation",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "dependencies": {
+                    "description": "Extra PyPI packages the script imports that are not built in, such as [{\"name\": \"tenacity\", \"version\": \"==9.0.0\"}]. Pin an exact version. At most 15. Leave it out to keep the current list; [] removes them all. They install when the script deploys.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "description": "The PyPI package name, such as tenacity.",
+                          "type": "string"
+                        },
+                        "version": {
+                          "description": "A version specifier, such as ==9.0.0.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "deploy": {
+                    "description": "true deploys the change in the same call and waits for the deploy result. Setup must be complete. Leave out to only save.",
+                    "type": "boolean"
+                  },
+                  "how_it_works": {
+                    "additionalProperties": false,
+                    "description": "How the script works, for someone who cannot read code. Required whenever you send a script. steps: 2 to 8 short plain sentences in run order, covering what it reads, what it decides, and what it changes or sends, naming each service it uses. notes: up to 4 sentences for branches that matter, such as what happens when there is nothing to do or a service fails. No code, variable names, or jargon. It must match the script exactly; the card shows it next to the services the server detects in the script.",
+                    "properties": {
+                      "notes": {
+                        "items": {
+                          "maxLength": 240,
+                          "type": "string"
+                        },
+                        "maxItems": 4,
+                        "type": "array"
+                      },
+                      "steps": {
+                        "items": {
+                          "maxLength": 240,
+                          "type": "string"
+                        },
+                        "maxItems": 8,
+                        "minItems": 2,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "steps"
+                    ],
+                    "type": "object"
+                  },
+                  "name": {
+                    "description": "A short name the person will recognise, such as \"Morning summary\".",
+                    "maxLength": 120,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "retry": {
+                    "additionalProperties": false,
+                    "description": "incoming only: how a failed run on an event is retried. Platform errors and timeouts are retried up to max_attempts attempts in total; script errors only when retry_script_errors is true. The default is 3 attempts without script errors. It replaces the whole policy.",
+                    "properties": {
+                      "max_attempts": {
+                        "description": "Attempts in total, including the first. 1 turns retries off.",
+                        "maximum": 3,
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "retry_script_errors": {
+                        "description": "Also retry when the script itself raised an error. Only for scripts that are safe to run twice on the same event.",
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "max_attempts"
+                    ],
+                    "type": "object"
+                  },
+                  "schedule": {
+                    "additionalProperties": false,
+                    "description": "When the automation runs. Prefer every_minutes, hourly, daily, weekdays, weekly, or monthly; use cron only when none of them fits, such as the second Tuesday of the month or every 15 minutes during business hours. timezone is an IANA name, required for daily, weekdays, weekly, monthly, and cron; it defaults to UTC for every_minutes and hourly.",
+                    "properties": {
+                      "day_of_month": {
+                        "description": "monthly only: the day of the month, 1 to 28, or \"last\" for the last day. Days 29 to 31 are not offered because some months lack them; use \"last\" for month end.",
+                        "oneOf": [
+                          {
+                            "maximum": 28,
+                            "minimum": 1,
+                            "type": "integer"
+                          },
+                          {
+                            "enum": [
+                              "last"
+                            ],
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      "every_minutes": {
+                        "description": "every_minutes only: minutes between runs; must divide 60 and be at least 5.",
+                        "enum": [
+                          5,
+                          6,
+                          10,
+                          12,
+                          15,
+                          20,
+                          30
+                        ],
+                        "type": "integer"
+                      },
+                      "expression": {
+                        "description": "cron only: a 5-field cron (minute hour day-of-month month day-of-week) or a 6-field AWS cron with year, in the schedule's timezone. AWS extras work: L (last day), 15W (weekday nearest the 15th), 6L (last Friday), 3#2 (second Tuesday). Runs at least 5 minutes apart. Set day-of-month or day-of-week, not both.",
+                        "maxLength": 120,
+                        "minLength": 9,
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "Cadence. The shortest is every 5 minutes.",
+                        "enum": [
+                          "every_minutes",
+                          "hourly",
+                          "daily",
+                          "weekdays",
+                          "weekly",
+                          "monthly",
+                          "cron"
+                        ],
+                        "type": "string"
+                      },
+                      "minute": {
+                        "description": "hourly only: minute past the hour.",
+                        "maximum": 59,
+                        "minimum": 0,
+                        "type": "integer"
+                      },
+                      "time": {
+                        "description": "daily, weekdays, weekly, monthly: 24-hour local time HH:MM.",
+                        "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                        "type": "string"
+                      },
+                      "timezone": {
+                        "description": "IANA timezone such as Europe/London.",
+                        "maxLength": 64,
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "weekday": {
+                        "description": "weekly only.",
+                        "enum": [
+                          "monday",
+                          "tuesday",
+                          "wednesday",
+                          "thursday",
+                          "friday",
+                          "saturday",
+                          "sunday"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind"
+                    ],
+                    "type": "object"
+                  },
+                  "script": {
+                    "description": "The complete Python script. Before writing it, you must read the script reference, the MCP resource clickruntime://docs/runtime (read it with resources/read; it is not a tool), or, if you cannot read MCP resources, the same text at https://clickruntime.com/docs/runtime.md; the script must follow them. It needs a @on_trigger (schedule) or @on_event (incoming) handler decorated from clickruntime. Read secrets and connections with clickruntime.credentials; credentials.connection and credentials.secret each return a plain str (the token or value itself, with no .access_token), and the script never gets a refresh token; never write a key's value into the script. Outbound calls are HTTPS only; no subprocess, os.system, multiprocessing or ctypes.",
+                    "maxLength": 100000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "setup_needs": {
+                    "description": "Every connection account and saved key the script reads through clickruntime.credentials. Before writing the script, call list_connections and ask the person which existing account to use for each service (or confirm the one there is); set up a new account only if they ask or none fits. For a service with no account yet, call list_app_catalog and use a ready-made app whose scopes and limits fit, without asking; draft an app of their own only when none fits. Never pick or invent an account name yourself. A script can read only what is declared here. An empty list means nothing to set up. Never put a key's value here.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "hint": {
+                          "description": "secret only: one sentence on where to create the key. Never the value.",
+                          "maxLength": 300,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "kind": {
+                          "description": "connection: a named account of an OAuth service (built in, a ready-made app from list_app_catalog, or an app from draft_oauth_provider). secret: a key the person adds in the ClickRuntime dashboard. notifications: the notifications Slack connection, needed when the script calls notify.slack.",
+                          "enum": [
+                            "connection",
+                            "secret",
+                            "notifications"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "connection: the account name, lowercase, such as work or personal; the script reads it with credentials.connection(provider, name), and several accounts of one provider are separate needs. secret: the secret name, UPPER_SNAKE_CASE, read with credentials.secret(name).",
+                          "pattern": "^([a-z][a-z0-9_]{0,31}|[A-Z][A-Z0-9_]{2,60})$",
+                          "type": "string"
+                        },
+                        "provider": {
+                          "description": "connection: email (built in, always ready, no name), the id of a ready-made app from list_app_catalog (starts with cr_), or the slug of an app from draft_oauth_provider, such as slack or google. secret: optional descriptive label.",
+                          "maxLength": 40,
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "description": "connection with a ready-made app or an app from draft_oauth_provider: the OAuth scopes this script needs from the account, one per item, exactly as the app lists them. Setup stays incomplete until the app requests them and the account has granted them.",
+                          "items": {
+                            "maxLength": 200,
+                            "type": "string"
+                          },
+                          "maxItems": 30,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "kind"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 20,
+                    "type": "array"
+                  },
+                  "signature": {
+                    "additionalProperties": false,
+                    "description": "incoming and remember_then_schedule only: how the platform checks the sender's signature before a run. It replaces all signature settings at once. Use a named provider when the sender is one of them; use hmac_sha256 for any other sender that signs the raw body with HMAC-SHA256, and set header, encoding, and prefix from the sender's docs. The secret's value is never sent here: name it in secret_name and list the same name in setup_needs so the person saves the value in the application. provider none turns the check off.",
+                    "properties": {
+                      "encoding": {
+                        "description": "hmac_sha256 only: how the signature is encoded. Leave out to accept either.",
+                        "enum": [
+                          "hex",
+                          "base64"
+                        ],
+                        "type": "string"
+                      },
+                      "header": {
+                        "description": "hmac_sha256 only: the header that carries the signature, such as x-acme-signature. Leave out to try x-signature, x-signature-256, x-webhook-signature, x-hub-signature-256, and tally-signature.",
+                        "pattern": "^[A-Za-z0-9_-]{1,100}$",
+                        "type": "string"
+                      },
+                      "prefix": {
+                        "description": "hmac_sha256 only: text that must start the header value and is removed before comparing, such as sha256= or v1=. Leave out to accept an optional sha256=.",
+                        "maxLength": 32,
+                        "type": "string"
+                      },
+                      "provider": {
+                        "description": "The sender's signing scheme. none turns the check off.",
+                        "enum": [
+                          "stripe",
+                          "github",
+                          "shopify",
+                          "typeform",
+                          "standard_webhooks",
+                          "hmac_sha256",
+                          "none"
+                        ],
+                        "type": "string"
+                      },
+                      "require": {
+                        "description": "true: a delivery whose signature does not verify is stored as rejected, gets 401, and never runs. false (default): it runs with event.verified.ok false so the script decides.",
+                        "type": "boolean"
+                      },
+                      "secret_name": {
+                        "description": "Required unless provider is none: the saved secret that holds the signing secret, such as STRIPE_WEBHOOK_SECRET. Name only, never the value.",
+                        "pattern": "^[A-Z][A-Z0-9_]{2,60}$",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "provider"
+                    ],
+                    "type": "object"
+                  },
+                  "summary": {
+                    "description": "One or two plain sentences saying what happens and when. It appears on the cards.",
+                    "maxLength": 1000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Automation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Change an automation. A draft is updated in place (update_draft); a live or paused one gets a pending change (change_automation). deploy: true deploys a draft, or asks the person to confirm a live change.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "update_draft|change_automation"
+      }
+    },
+    "/automations/{automation_id}/deploy": {
+      "get": {
+        "operationId": "waitForDeploy",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Automation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Wait for the latest deploy to finish (long poll, about 45 seconds).",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "wait_for_deploy"
+      }
+    },
+    "/automations/{automation_id}/events": {
+      "get": {
+        "operationId": "listIncomingEvents",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "next_cursor from the previous page.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page size.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "List events received on the trigger link.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "list_incoming_events"
+      }
+    },
+    "/automations/{automation_id}/events/latest": {
+      "get": {
+        "operationId": "getLatestEvent",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LatestEvent"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "The latest event received on the trigger link.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "get_latest_event"
+      }
+    },
+    "/automations/{automation_id}/events/{event_id}/replay": {
+      "post": {
+        "operationId": "replayEvent",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event id from the events list.",
+            "in": "path",
+            "name": "event_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Run"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:control"
+            ]
+          }
+        ],
+        "summary": "Run a live or paused automation again on an event it received.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "replay_event"
+      }
+    },
+    "/automations/{automation_id}/pause": {
+      "post": {
+        "operationId": "pauseAutomation",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Automation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:control"
+            ]
+          }
+        ],
+        "summary": "Pause a live automation. Needs no confirmation.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "pause_automation"
+      }
+    },
+    "/automations/{automation_id}/runs": {
+      "get": {
+        "operationId": "listRuns",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by run status.",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "next_cursor from the previous page.",
+            "in": "query",
+            "name": "cursor",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page size.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "List runs.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "list_runs"
+      }
+    },
+    "/automations/{automation_id}/script": {
+      "get": {
+        "operationId": "getScript",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "A version number, or omit for the current one.",
+            "in": "query",
+            "name": "version",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Script"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Get the automation's script.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "get_script"
+      }
+    },
+    "/automations/{automation_id}/setup": {
+      "get": {
+        "operationId": "getSetupStatus",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupStatus"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Setup steps left for the person (connections and keys), each with its link.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "get_setup_status"
+      }
+    },
+    "/automations/{automation_id}/test-event": {
+      "post": {
+        "operationId": "sendTestEvent",
+        "parameters": [
+          {
+            "description": "Automation id (aut_...).",
+            "in": "path",
+            "name": "automation_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "body": {
+                    "additionalProperties": true,
+                    "description": "A realistic sample of the sender's JSON payload. Never include a real key.",
+                    "type": "object"
+                  },
+                  "confirmation_id": {
+                    "description": "Set by the confirm card from its own result metadata.",
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Run"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Send a sample event to an incoming automation. Body: {\"body\": {...}}.",
+        "tags": [
+          "automations"
+        ],
+        "x-mcp-tool": "send_test_event"
+      }
+    },
+    "/confirmations": {
+      "post": {
+        "operationId": "prepareConfirmation",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "action": {
+                    "description": "What the person wants to do.",
+                    "enum": [
+                      "enable",
+                      "resume",
+                      "run_now",
+                      "apply_change",
+                      "delete",
+                      "send_test_event_live"
+                    ],
+                    "type": "string"
+                  },
+                  "automation_id": {
+                    "description": "The automation id, starting with aut_ (from list_automations or a previous result).",
+                    "pattern": "^aut_[0-9a-z]+$",
+                    "type": "string"
+                  },
+                  "expected_state": {
+                    "description": "Set by a card: the state it showed. Leave it out.",
+                    "type": "string"
+                  },
+                  "test_body": {
+                    "additionalProperties": true,
+                    "description": "send_test_event_live only: the sample JSON body to send.",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "automation_id",
+                  "action"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Confirmation"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Ask the person to confirm turning on, resuming, running, applying a change or deleting. Returns a link for the person; the agent can never confirm.",
+        "tags": [
+          "confirmations"
+        ],
+        "x-mcp-tool": "prepare_confirmation"
+      }
+    },
+    "/confirmations/{confirmation_ref}": {
+      "get": {
+        "operationId": "getConfirmationStatus",
+        "parameters": [
+          {
+            "description": "confirmation_ref from POST /confirmations.",
+            "in": "path",
+            "name": "confirmation_ref",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfirmationStatus"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Whether the person confirmed, cancelled, or the link expired.",
+        "tags": [
+          "confirmations"
+        ],
+        "x-mcp-tool": "get_confirmation_status"
+      }
+    },
+    "/connections": {
+      "get": {
+        "operationId": "listConnections",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connections"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Connected accounts and saved key names (never values).",
+        "tags": [
+          "connections"
+        ],
+        "x-mcp-tool": "list_connections"
+      },
+      "post": {
+        "operationId": "beginConnection",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "automation_id": {
+                    "description": "The automation id, starting with aut_ (from list_automations or a previous result).",
+                    "pattern": "^aut_[0-9a-z]+$",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "The account name the person chose, such as work or personal. Required unless purpose is notifications.",
+                    "pattern": "^[a-z][a-z0-9_]{0,31}$",
+                    "type": "string"
+                  },
+                  "provider": {
+                    "description": "The id of a ready-made app from list_app_catalog, the slug of an app from draft_oauth_provider, such as slack or google, or slack with purpose notifications.",
+                    "pattern": "^[a-z][a-z0-9_]{1,31}$",
+                    "type": "string"
+                  },
+                  "purpose": {
+                    "description": "automation (default): a named account scripts fetch. notifications: the single Slack connection used by notify.slack and alerts.",
+                    "enum": [
+                      "automation",
+                      "notifications"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "provider"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connect"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Get a consent link for the person to connect an account.",
+        "tags": [
+          "connections"
+        ],
+        "x-mcp-tool": "begin_connection"
+      }
+    },
+    "/docs/runtime": {
+      "get": {
+        "operationId": "getRuntimeDoc",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuntimeDoc"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [],
+        "summary": "The script reference (also at https://clickruntime.com/docs/runtime.md).",
+        "tags": [
+          "docs"
+        ]
+      }
+    },
+    "/issues": {
+      "get": {
+        "operationId": "listIssues",
+        "parameters": [
+          {
+            "description": "",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IssueList"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Support issues.",
+        "tags": [
+          "issues"
+        ],
+        "x-mcp-tool": "list_issues"
+      },
+      "post": {
+        "operationId": "reportIssue",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "automation_id": {
+                    "description": "The automation id, starting with aut_ (from list_automations or a previous result).",
+                    "pattern": "^aut_[0-9a-z]+$",
+                    "type": "string"
+                  },
+                  "body": {
+                    "description": "What happened, steps, error codes and messages. No keys or tokens.",
+                    "maxLength": 10000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "category": {
+                    "description": "What the issue is about.",
+                    "enum": [
+                      "bug",
+                      "connection",
+                      "billing",
+                      "other"
+                    ],
+                    "type": "string"
+                  },
+                  "run_id": {
+                    "description": "The run id, when one run shows the problem.",
+                    "pattern": "^run_[0-9a-z]+$",
+                    "type": "string"
+                  },
+                  "title": {
+                    "description": "One-line summary.",
+                    "maxLength": 200,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "title",
+                  "category",
+                  "body"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issue"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Report a problem to ClickRuntime support.",
+        "tags": [
+          "issues"
+        ],
+        "x-mcp-tool": "report_issue"
+      }
+    },
+    "/issues/{issue_id}": {
+      "get": {
+        "operationId": "getIssue",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "issue_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issue"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "A support issue with its messages.",
+        "tags": [
+          "issues"
+        ],
+        "x-mcp-tool": "get_issue"
+      }
+    },
+    "/issues/{issue_id}/messages": {
+      "post": {
+        "operationId": "addIssueMessage",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "issue_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "body": {
+                    "description": "The message.",
+                    "maxLength": 10000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "body"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issue"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Add a message to a support issue.",
+        "tags": [
+          "issues"
+        ],
+        "x-mcp-tool": "add_issue_message"
+      }
+    },
+    "/me": {
+      "get": {
+        "operationId": "getProfile",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Who is signed in, in which workspace.",
+        "tags": [
+          "me"
+        ],
+        "x-mcp-tool": "get_profile"
+      }
+    },
+    "/oauth-providers": {
+      "post": {
+        "operationId": "draftOauthProvider",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "auth_params": {
+                    "additionalProperties": {
+                      "maxLength": 200,
+                      "type": "string"
+                    },
+                    "description": "Extra authorize parameters the docs require, such as owner=user or access_type=offline.",
+                    "maxProperties": 10,
+                    "type": "object"
+                  },
+                  "authorize_url": {
+                    "description": "The service's OAuth 2.0 authorization endpoint (https), from its docs.",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "docs_url": {
+                    "description": "The docs page that explains creating an OAuth app (https).",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Display name, such as Notion.",
+                    "maxLength": 80,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "scope_separator": {
+                    "description": "How the service joins scopes. Most use space.",
+                    "enum": [
+                      "space",
+                      "comma"
+                    ],
+                    "type": "string"
+                  },
+                  "scopes": {
+                    "description": "The fewest scopes the script needs, one per item.",
+                    "items": {
+                      "maxLength": 200,
+                      "type": "string"
+                    },
+                    "maxItems": 50,
+                    "type": "array"
+                  },
+                  "setup_notes": {
+                    "description": "The setup guide shown on the setup page, written from the service's docs. One step per '## Step title' heading, then plain sentences. Use **Exact button or menu name** for anything to click, [link text](https://...) for pages to open (link straight to the console page), and `value` for text to paste (shown with a copy icon). Placeholders: {{redirect_url}} (the callback URL with a copy icon, usable inside a sentence), {{scopes}} (every scope with a copy icon, on its own line), {{client_id}} and {{client_secret}} (required: the input boxes where the person pastes them, on their own lines, in the step where the service shows those values). {{redirect_url}} is required and goes only where the service asks for a redirect or callback URL. The person reads this guide on the ClickRuntime setup page, so never tell them to open it, and do not number titles ('Step 3:'). An optional final '## After connecting' section is shown with the Connect step (for example inviting a bot to channels). ClickRuntime adds the Connect step itself. Never include keys.",
+                    "maxLength": 8000,
+                    "type": "string"
+                  },
+                  "slug": {
+                    "description": "Short id for the app, such as notion or hubspot. Used as the provider in setup_needs.",
+                    "pattern": "^[a-z][a-z0-9_]{1,31}$",
+                    "type": "string"
+                  },
+                  "supports_refresh": {
+                    "description": "true when the service issues refresh tokens; the token is then refreshed before runs. Default true.",
+                    "type": "boolean"
+                  },
+                  "token_auth": {
+                    "description": "How the token request sends the client credentials: body (form fields) or basic (HTTP Basic). Use what the docs say; body is the default.",
+                    "enum": [
+                      "body",
+                      "basic"
+                    ],
+                    "type": "string"
+                  },
+                  "token_url": {
+                    "description": "The service's OAuth 2.0 token endpoint (https), from its docs.",
+                    "maxLength": 1024,
+                    "type": "string"
+                  },
+                  "use_pkce": {
+                    "description": "true when the service requires or supports PKCE (S256).",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "slug",
+                  "name",
+                  "authorize_url",
+                  "token_url"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OAuthProvider"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:draft"
+            ]
+          }
+        ],
+        "summary": "Draft a custom OAuth app the person finishes in the ClickRuntime dashboard.",
+        "tags": [
+          "oauth-providers"
+        ],
+        "x-mcp-tool": "draft_oauth_provider"
+      }
+    },
+    "/runs/{run_id}": {
+      "get": {
+        "operationId": "getRun",
+        "parameters": [
+          {
+            "description": "Run id (run_...).",
+            "in": "path",
+            "name": "run_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Wait up to about 45 seconds for a running run to finish.",
+            "in": "query",
+            "name": "wait",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Run"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Get a run with its logs.",
+        "tags": [
+          "runs"
+        ],
+        "x-mcp-tool": "get_run"
+      }
+    },
+    "/session": {
+      "delete": {
+        "operationId": "signOut",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignedOut"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "workspace:read"
+            ]
+          }
+        ],
+        "summary": "Sign out: ends this sign-in for this workspace (MCP and the API), as disconnecting it in the ClickRuntime dashboard does.",
+        "tags": [
+          "session"
+        ]
+      }
+    },
+    "/setup-runs": {
+      "post": {
+        "operationId": "runSetupScript",
+        "parameters": [
+          {
+            "description": "Retries with the same key within 24 hours get the first answer instead of acting twice.",
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "additionalProperties": false,
+                "properties": {
+                  "changes": {
+                    "description": "Required for setup: one plain sentence on what the script creates or changes outside ClickRuntime. Leave out for discover.",
+                    "maxLength": 500,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "dependencies": {
+                    "description": "Extra PyPI packages the script imports that are not built in, such as [{\"name\": \"tenacity\", \"version\": \"==9.0.0\"}]. Pin an exact version. At most 15. Leave it out to keep the current list; [] removes them all. They install when the script deploys.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "description": "The PyPI package name, such as tenacity.",
+                          "type": "string"
+                        },
+                        "version": {
+                          "description": "A version specifier, such as ==9.0.0.",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "name"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "purpose": {
+                    "description": "discover: only reads, to find out something an automation needs. setup: creates or changes something outside ClickRuntime, once.",
+                    "enum": [
+                      "discover",
+                      "setup"
+                    ],
+                    "type": "string"
+                  },
+                  "script": {
+                    "description": "The complete Python script with an @on_trigger handler from clickruntime. Read the script reference first.",
+                    "maxLength": 100000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "setup_needs": {
+                    "description": "Every connection account and saved key the script reads through clickruntime.credentials. Before writing the script, call list_connections and ask the person which existing account to use for each service (or confirm the one there is); set up a new account only if they ask or none fits. For a service with no account yet, call list_app_catalog and use a ready-made app whose scopes and limits fit, without asking; draft an app of their own only when none fits. Never pick or invent an account name yourself. A script can read only what is declared here. An empty list means nothing to set up. Never put a key's value here.",
+                    "items": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "hint": {
+                          "description": "secret only: one sentence on where to create the key. Never the value.",
+                          "maxLength": 300,
+                          "minLength": 1,
+                          "type": "string"
+                        },
+                        "kind": {
+                          "description": "connection: a named account of an OAuth service (built in, a ready-made app from list_app_catalog, or an app from draft_oauth_provider). secret: a key the person adds in the ClickRuntime dashboard. notifications: the notifications Slack connection, needed when the script calls notify.slack.",
+                          "enum": [
+                            "connection",
+                            "secret",
+                            "notifications"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "description": "connection: the account name, lowercase, such as work or personal; the script reads it with credentials.connection(provider, name), and several accounts of one provider are separate needs. secret: the secret name, UPPER_SNAKE_CASE, read with credentials.secret(name).",
+                          "pattern": "^([a-z][a-z0-9_]{0,31}|[A-Z][A-Z0-9_]{2,60})$",
+                          "type": "string"
+                        },
+                        "provider": {
+                          "description": "connection: email (built in, always ready, no name), the id of a ready-made app from list_app_catalog (starts with cr_), or the slug of an app from draft_oauth_provider, such as slack or google. secret: optional descriptive label.",
+                          "maxLength": 40,
+                          "type": "string"
+                        },
+                        "scopes": {
+                          "description": "connection with a ready-made app or an app from draft_oauth_provider: the OAuth scopes this script needs from the account, one per item, exactly as the app lists them. Setup stays incomplete until the app requests them and the account has granted them.",
+                          "items": {
+                            "maxLength": 200,
+                            "type": "string"
+                          },
+                          "maxItems": 30,
+                          "type": "array"
+                        }
+                      },
+                      "required": [
+                        "kind"
+                      ],
+                      "type": "object"
+                    },
+                    "maxItems": 20,
+                    "type": "array"
+                  },
+                  "title": {
+                    "description": "A short name the person will recognise, such as \"Find the Tally form's fields\".",
+                    "maxLength": 120,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "purpose",
+                  "title",
+                  "script",
+                  "setup_needs"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetupRun"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "4XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          },
+          "5XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error with a stable code, a message and, when the person must act, next."
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "automations:control"
+            ]
+          }
+        ],
+        "summary": "Run a one-off discovery or setup script with the person's connections. Nothing is kept.",
+        "tags": [
+          "setup-runs"
+        ],
+        "x-mcp-tool": "run_setup_script"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://clickruntime.com/api/v1"
+    }
+  ]
+}

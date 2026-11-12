@@ -1,0 +1,127 @@
+{
+  "name": "deploy --wait polls until confirmed, then waits for the deploy",
+  "args": [
+    "deploy",
+    "aut_1",
+    "--json",
+    "--wait"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations/aut_1",
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "summary": "Email me the status.",
+        "status": "draft",
+        "pattern": "schedule",
+        "state": "s1",
+        "dependencies": [],
+        "connections_used": [],
+        "outbound_hosts": [],
+        "how_it_works": {
+          "steps": []
+        },
+        "how_it_works_gaps": [],
+        "notes": [],
+        "layer": null
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/confirmations",
+      "status": 201,
+      "body": {
+        "confirmation_ref": "cfr_1",
+        "action": "enable",
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "expires_at": "2100-01-01T00:00:00Z",
+        "effect": "Turns on Morning summary.",
+        "links": {
+          "confirm": "https://clickruntime.com/confirm/abc"
+        },
+        "next": {
+          "action": "open_link",
+          "url": "https://clickruntime.com/confirm/abc",
+          "say": "Open this link and press Turn on to confirm: Turns on Morning summary."
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/confirmations/cfr_1",
+      "body": {
+        "confirmation_ref": "cfr_1",
+        "action": "enable",
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "state": "pending",
+        "expires_at": "2100-01-01T00:00:00Z",
+        "decided_at": null,
+        "decided_via": null,
+        "deploy": null,
+        "run": null,
+        "automation": null
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/confirmations/cfr_1",
+      "body": {
+        "confirmation_ref": "cfr_1",
+        "action": "enable",
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "state": "confirmed",
+        "expires_at": "2100-01-01T00:00:00Z",
+        "decided_at": null,
+        "decided_via": null,
+        "deploy": null,
+        "run": null,
+        "automation": null
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/automations/aut_1/deploy",
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "summary": "Email me the status.",
+        "status": "live",
+        "pattern": "schedule",
+        "state": "s1",
+        "dependencies": [],
+        "connections_used": [],
+        "outbound_hosts": [],
+        "how_it_works": {
+          "steps": []
+        },
+        "how_it_works_gaps": [],
+        "notes": [],
+        "layer": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "state": "confirmed",
+      "confirmation": {
+        "state": "confirmed"
+      },
+      "automation": {
+        "status": "live"
+      }
+    }
+  }
+}

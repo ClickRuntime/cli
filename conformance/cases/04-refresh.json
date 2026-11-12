@@ -1,0 +1,60 @@
+{
+  "name": "an expired token is refreshed and the file rewritten",
+  "args": [
+    "status",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-old",
+      "refresh_token": "ref-1",
+      "expires_at": 1
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "body": {
+        "access_token": "tok-new",
+        "refresh_token": "ref-new",
+        "expires_in": 3600,
+        "token_type": "Bearer"
+      },
+      "expect_form": {
+        "grant_type": "refresh_token",
+        "refresh_token": "ref-1",
+        "client_id": "clickruntime-cli"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "body": {
+        "id": "prf_1",
+        "email": "ada@example.com",
+        "name": "Ada",
+        "nickname": "Ada"
+      },
+      "expect_headers": {
+        "authorization": "Bearer tok-new"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "signed_in": true
+    },
+    "files": {
+      "config:credentials.json": {
+        "profiles": {
+          "default": {
+            "access_token": "tok-new",
+            "refresh_token": "ref-new"
+          }
+        }
+      }
+    }
+  }
+}

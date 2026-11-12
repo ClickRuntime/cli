@@ -1,0 +1,43 @@
+{
+  "name": "login --device --no-wait prints the code and link, exit 4",
+  "args": [
+    "login",
+    "--device",
+    "--no-wait",
+    "--json"
+  ],
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/device_authorization",
+      "body": {
+        "device_code": "dev-1",
+        "user_code": "BCDF-GHJK",
+        "verification_uri": "https://clickruntime.com/device",
+        "expires_in": 600,
+        "interval": 0
+      },
+      "expect_form": {
+        "client_id": "clickruntime-cli",
+        "scope": "openid email workspace:read automations:draft automations:control offline_access"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 4,
+    "json": {
+      "state": "waiting",
+      "user_code": "BCDF-GHJK",
+      "next": {
+        "action": "open_link",
+        "url": "https://clickruntime.com/device",
+        "say": "Open https://clickruntime.com/device and enter BCDF-GHJK to connect ClickRuntime."
+      }
+    },
+    "files": {
+      "config:pending-default.json": {
+        "device_code": "dev-1"
+      }
+    }
+  }
+}

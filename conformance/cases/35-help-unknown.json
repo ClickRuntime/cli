@@ -1,0 +1,11 @@
+{
+  "name": "help for an unknown command is a usage error",
+  "args": [
+    "nope",
+    "--help"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 2
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "connect returns the consent link, exit 4",
+  "args": [
+    "connect",
+    "slack",
+    "--automation",
+    "aut_1",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/connections",
+      "status": 201,
+      "expect_body": {
+        "provider": "slack",
+        "automation_id": "aut_1"
+      },
+      "body": {
+        "provider": "slack",
+        "name": "default",
+        "display_name": "Slack",
+        "purpose": "automation",
+        "already_connected": false,
+        "scopes_plain": [],
+        "granted_scopes": [],
+        "new_scopes": [],
+        "used_by": [],
+        "links": {
+          "connect": "https://clickruntime.com/connect/x"
+        },
+        "next": {
+          "action": "open_link",
+          "url": "https://clickruntime.com/connect/x",
+          "say": "Open this link to connect your Slack account."
+        }
+      }
+    }
+  ],
+  "expect": {
+    "exit": 4,
+    "json": {
+      "links": {
+        "connect": "https://clickruntime.com/connect/x"
+      }
+    }
+  }
+}

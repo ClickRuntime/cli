@@ -1,0 +1,53 @@
+{
+  "name": "setup with steps left is exit 4 with next",
+  "args": [
+    "setup",
+    "aut_1",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations/aut_1/setup",
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "status": "draft",
+        "ready": false,
+        "steps": [
+          "Add the key"
+        ],
+        "items": [
+          {
+            "id": "s",
+            "kind": "secret",
+            "name": "OPENAI_API_KEY",
+            "ready": false,
+            "url": "https://clickruntime.com/connections?add=OPENAI_API_KEY"
+          }
+        ],
+        "next": {
+          "action": "open_link",
+          "url": "https://clickruntime.com/connections?add=OPENAI_API_KEY",
+          "say": "One setup step is left."
+        }
+      }
+    }
+  ],
+  "expect": {
+    "exit": 4,
+    "json": {
+      "ready": false,
+      "next": {
+        "url": "https://clickruntime.com/connections?add=OPENAI_API_KEY"
+      }
+    }
+  }
+}

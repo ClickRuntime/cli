@@ -1,0 +1,33 @@
+{
+  "name": "a refused refresh is exit 3",
+  "args": [
+    "list",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-old",
+      "refresh_token": "ref-1",
+      "expires_at": 1
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "status": 400,
+      "body": {
+        "error": "invalid_grant"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 3,
+    "json": {
+      "error": "signed_out",
+      "next": {
+        "action": "login"
+      }
+    }
+  }
+}

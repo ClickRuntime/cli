@@ -1,0 +1,49 @@
+{
+  "name": "issue report",
+  "args": [
+    "issue",
+    "report",
+    "--title",
+    "Runs fail",
+    "--category",
+    "bug",
+    "--body",
+    "It fails.",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/issues",
+      "status": 201,
+      "expect_body": {
+        "title": "Runs fail",
+        "category": "bug",
+        "body": "It fails."
+      },
+      "body": {
+        "id": "iss_1",
+        "title": "Runs fail",
+        "category": "bug",
+        "status": "open",
+        "source": "api",
+        "created_at": "x",
+        "updated_at": "x",
+        "has_support_reply": false
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "id": "iss_1"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "pause is direct",
+  "args": [
+    "pause",
+    "aut_1",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/automations/aut_1/pause",
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "summary": "Email me the status.",
+        "status": "paused",
+        "pattern": "schedule",
+        "state": "s1",
+        "dependencies": [],
+        "connections_used": [],
+        "outbound_hosts": [],
+        "how_it_works": {
+          "steps": []
+        },
+        "how_it_works_gaps": [],
+        "notes": [],
+        "layer": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "status": "paused"
+    }
+  }
+}

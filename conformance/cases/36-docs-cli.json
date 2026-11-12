@@ -1,0 +1,23 @@
+{
+  "name": "docs cli prints the CLI guide from the site, with no token",
+  "args": [
+    "docs",
+    "cli"
+  ],
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/docs/cli.md",
+      "body": "# ClickRuntime CLI\n\nInstall the CLI and sign in.",
+      "expect_headers": {
+        "authorization": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "stdout_contains": [
+      "# ClickRuntime CLI"
+    ]
+  }
+}

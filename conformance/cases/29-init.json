@@ -1,0 +1,22 @@
+{
+  "name": "init writes the two project files",
+  "args": [
+    "init",
+    "Morning summary",
+    "--pattern",
+    "incoming",
+    "--json"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 0,
+    "files": {
+      "clickruntime.json": {
+        "name": "Morning summary",
+        "pattern": "incoming",
+        "schedule": "<absent>"
+      },
+      "automation.py": "@on_event"
+    }
+  }
+}

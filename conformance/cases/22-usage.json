@@ -1,0 +1,14 @@
+{
+  "name": "unknown command is exit 2",
+  "args": [
+    "frobnicate",
+    "--json"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 2,
+    "json": {
+      "error": "usage"
+    }
+  }
+}

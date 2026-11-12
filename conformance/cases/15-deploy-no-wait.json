@@ -1,0 +1,75 @@
+{
+  "name": "deploy --json asks for a confirmation and returns the link, exit 4",
+  "args": [
+    "deploy",
+    "aut_1",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations/aut_1",
+      "body": {
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "summary": "Email me the status.",
+        "status": "draft",
+        "pattern": "schedule",
+        "state": "s1",
+        "dependencies": [],
+        "connections_used": [],
+        "outbound_hosts": [],
+        "how_it_works": {
+          "steps": []
+        },
+        "how_it_works_gaps": [],
+        "notes": [],
+        "layer": null
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/confirmations",
+      "status": 201,
+      "body": {
+        "confirmation_ref": "cfr_1",
+        "action": "enable",
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "expires_at": "2100-01-01T00:00:00Z",
+        "effect": "Turns on Morning summary.",
+        "links": {
+          "confirm": "https://clickruntime.com/confirm/abc"
+        },
+        "next": {
+          "action": "open_link",
+          "url": "https://clickruntime.com/confirm/abc",
+          "say": "Open this link and press Turn on to confirm: Turns on Morning summary."
+        }
+      },
+      "expect_body": {
+        "automation_id": "aut_1",
+        "action": "enable"
+      },
+      "expect_headers": {
+        "idempotency-key": "<any>"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 4,
+    "json": {
+      "confirmation_ref": "cfr_1",
+      "next": {
+        "url": "https://clickruntime.com/confirm/abc"
+      }
+    }
+  }
+}

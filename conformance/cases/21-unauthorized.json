@@ -1,0 +1,38 @@
+{
+  "name": "401 is exit 3 and keeps next",
+  "args": [
+    "list",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations",
+      "status": 401,
+      "body": {
+        "error": "invalid_token",
+        "message": "Sign in again.",
+        "next": {
+          "action": "login",
+          "say": "Sign in."
+        }
+      }
+    }
+  ],
+  "expect": {
+    "exit": 3,
+    "json": {
+      "error": "invalid_token",
+      "next": {
+        "action": "login"
+      }
+    }
+  }
+}

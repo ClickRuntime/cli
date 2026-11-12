@@ -1,0 +1,40 @@
+{
+  "name": "wait <ref> on an expired confirmation is exit 6",
+  "args": [
+    "wait",
+    "cfr_1",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/confirmations/cfr_1",
+      "body": {
+        "confirmation_ref": "cfr_1",
+        "action": "enable",
+        "automation_id": "aut_1",
+        "name": "Morning summary",
+        "state": "expired",
+        "expires_at": "2100-01-01T00:00:00Z",
+        "decided_at": null,
+        "decided_via": null,
+        "deploy": null,
+        "run": null,
+        "automation": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 6,
+    "json": {
+      "error": "confirmation_expired"
+    }
+  }
+}

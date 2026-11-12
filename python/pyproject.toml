@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clickruntime-cli"
+version = "0.1.0"
+description = "ClickRuntime CLI: run Python automations on a schedule or when an event arrives, from a coding agent."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["clickruntime", "automation", "cron", "webhook", "agent", "cli"]
+classifiers = [
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://clickruntime.com/cli"
+Documentation = "https://clickruntime.com/docs/cli"
+Source = "https://github.com/ClickRuntime/cli"
+
+[project.scripts]
+clickruntime = "clickruntime_cli.cli:run"
+
+[tool.setuptools]
+# Only clickruntime_cli: a top-level clickruntime module would shadow the runtime SDK scripts import.
+packages = ["clickruntime_cli"]

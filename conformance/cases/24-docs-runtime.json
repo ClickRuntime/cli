@@ -1,0 +1,26 @@
+{
+  "name": "docs runtime needs no sign-in and sends no token",
+  "args": [
+    "docs",
+    "runtime"
+  ],
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/docs/runtime",
+      "body": {
+        "format": "markdown",
+        "content": "# Script reference\n@on_trigger"
+      },
+      "expect_headers": {
+        "authorization": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "stdout_contains": [
+      "# Script reference"
+    ]
+  }
+}

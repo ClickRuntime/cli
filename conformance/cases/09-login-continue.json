@@ -1,0 +1,42 @@
+{
+  "name": "login --continue finishes a pending sign-in",
+  "args": [
+    "login",
+    "--continue",
+    "--json"
+  ],
+  "pending": {
+    "device_code": "dev-1",
+    "user_code": "BCDF-GHJK",
+    "interval": 0,
+    "expires_at": 4102444800
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "body": {
+        "access_token": "tok-new",
+        "refresh_token": "ref-new",
+        "expires_in": 3600,
+        "token_type": "Bearer"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "body": {
+        "id": "prf_1",
+        "email": "ada@example.com",
+        "name": "Ada",
+        "nickname": "Ada"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "signed_in": true
+    }
+  }
+}

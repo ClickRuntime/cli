@@ -1,0 +1,35 @@
+{
+  "name": "a denied device sign-in is exit 6",
+  "args": [
+    "login",
+    "--device",
+    "--json"
+  ],
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/device_authorization",
+      "body": {
+        "device_code": "dev-1",
+        "user_code": "BCDF-GHJK",
+        "verification_uri": "https://clickruntime.com/device",
+        "expires_in": 600,
+        "interval": 0
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "status": 400,
+      "body": {
+        "error": "access_denied"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 6,
+    "json": {
+      "error": "access_denied"
+    }
+  }
+}

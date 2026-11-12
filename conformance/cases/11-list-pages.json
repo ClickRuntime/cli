@@ -1,0 +1,66 @@
+{
+  "name": "list follows next_cursor",
+  "args": [
+    "list",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/automations",
+      "query": {
+        "limit": 50
+      },
+      "body": {
+        "automations": [
+          {
+            "automation_id": "aut_1",
+            "name": "A",
+            "status": "live"
+          }
+        ],
+        "total": 2,
+        "next_cursor": "c2"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/automations",
+      "query": {
+        "cursor": "c2"
+      },
+      "body": {
+        "automations": [
+          {
+            "automation_id": "aut_2",
+            "name": "B",
+            "status": "draft"
+          }
+        ],
+        "total": 2,
+        "next_cursor": null
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "total": 2,
+      "automations": [
+        {
+          "automation_id": "aut_1"
+        },
+        {
+          "automation_id": "aut_2"
+        }
+      ]
+    }
+  }
+}

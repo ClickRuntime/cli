@@ -1,0 +1,46 @@
+{
+  "name": "test-event sends the file as body",
+  "args": [
+    "test-event",
+    "aut_1",
+    "--file",
+    "event.json",
+    "--json"
+  ],
+  "credentials": {
+    "default": {
+      "access_token": "tok-file",
+      "refresh_token": "ref-1",
+      "expires_at": 4102444800
+    }
+  },
+  "files": {
+    "event.json": {
+      "order": 42
+    }
+  },
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/api/v1/automations/aut_1/test-event",
+      "body": {
+        "id": "run_1",
+        "automation_id": "aut_1",
+        "status": "succeeded",
+        "trigger": "test"
+      },
+      "expect_body": {
+        "body": {
+          "order": 42
+        }
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "id": "run_1",
+      "status": "succeeded"
+    }
+  }
+}

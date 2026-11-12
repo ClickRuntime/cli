@@ -1,0 +1,36 @@
+{
+  "name": "--workspace picks the profile",
+  "args": [
+    "status",
+    "--workspace",
+    "acme",
+    "--json"
+  ],
+  "credentials": {
+    "acme": {
+      "access_token": "tok-acme",
+      "expires_at": 4102444800
+    }
+  },
+  "mocks": [
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "body": {
+        "id": "prf_1",
+        "email": "ada@example.com",
+        "name": "Ada",
+        "nickname": "Ada"
+      },
+      "expect_headers": {
+        "authorization": "Bearer tok-acme"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "workspace_profile": "acme"
+    }
+  }
+}

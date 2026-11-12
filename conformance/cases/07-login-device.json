@@ -1,0 +1,76 @@
+{
+  "name": "login --device polls until approved and stores the tokens",
+  "args": [
+    "login",
+    "--device",
+    "--json"
+  ],
+  "mocks": [
+    {
+      "method": "POST",
+      "path": "/oauth/device_authorization",
+      "body": {
+        "device_code": "dev-1",
+        "user_code": "BCDF-GHJK",
+        "verification_uri": "https://clickruntime.com/device",
+        "expires_in": 600,
+        "interval": 0
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "status": 400,
+      "body": {
+        "error": "authorization_pending"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/oauth/token",
+      "body": {
+        "access_token": "tok-new",
+        "refresh_token": "ref-new",
+        "expires_in": 3600,
+        "token_type": "Bearer"
+      },
+      "expect_form": {
+        "grant_type": "urn:ietf:params:oauth:grant-type:device_code",
+        "device_code": "dev-1"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/me",
+      "body": {
+        "id": "prf_1",
+        "email": "ada@example.com",
+        "name": "Ada",
+        "nickname": "Ada"
+      },
+      "expect_headers": {
+        "authorization": "Bearer tok-new"
+      }
+    }
+  ],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "signed_in": true,
+      "email": "ada@example.com"
+    },
+    "stdout_contains": [
+      "BCDF-GHJK"
+    ],
+    "files": {
+      "config:credentials.json": {
+        "profiles": {
+          "default": {
+            "access_token": "tok-new"
+          }
+        }
+      },
+      "config:pending-default.json": null
+    }
+  }
+}

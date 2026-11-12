@@ -1,0 +1,16 @@
+{
+  "name": "help <command> --json prints the help topic as JSON",
+  "args": [
+    "help",
+    "wait",
+    "--json"
+  ],
+  "mocks": [],
+  "expect": {
+    "exit": 0,
+    "json": {
+      "command": "wait",
+      "usage": "clickruntime wait <confirmation_ref> [--timeout <seconds>]"
+    }
+  }
+}

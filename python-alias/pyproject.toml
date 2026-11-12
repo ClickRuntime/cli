@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+# Alias package: `pip install clickruntime` installs the ClickRuntime CLI (clickruntime-cli).
+# It ships no modules: a top-level clickruntime module would shadow the runtime SDK that scripts import.
+[project]
+name = "clickruntime"
+version = "0.0.1"
+description = "Installs the ClickRuntime CLI (clickruntime-cli): run Python automations on a schedule or when an event arrives, from a coding agent."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["clickruntime-cli"]
+keywords = ["clickruntime", "automation", "cron", "webhook", "agent", "cli"]
+classifiers = [
+  "Environment :: Console",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://clickruntime.com/cli"
+Documentation = "https://clickruntime.com/docs/cli"
+API = "https://clickruntime.com/docs/api"
+Source = "https://github.com/ClickRuntime/cli"
+Issues = "https://github.com/ClickRuntime/cli/issues"
+
+[tool.setuptools]
+packages = []
